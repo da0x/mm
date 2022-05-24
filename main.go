@@ -10,6 +10,10 @@ import (
 	"strings"
 )
 
+func compiler() string {
+	return "g++ -std=c++17"
+}
+
 func cmd(c string) string {
 	out, err := exec.Command("bash", "-c", c).Output()
 	if err != nil {
@@ -83,7 +87,7 @@ func main() {
 	for _, f := range cpp {
 		fmt.Printf(" %v", objectPath(f))
 	}
-	fmt.Printf("\n\tg++")
+	fmt.Printf("\n\t" + compiler())
 	for _, f := range cpp {
 		fmt.Printf(" %v", objectPath(f))
 	}
@@ -97,7 +101,7 @@ func main() {
 			fmt.Printf(" %v", d)
 		}
 		fmt.Println()
-		fmt.Println("\tg++ -c " + c + " -o " + objectPath(c))
+		fmt.Println("\t" + compiler() + " -c " + c + " -o " + objectPath(c))
 		fmt.Println()
 	}
 	fmt.Println("run: " + binaryPath())
