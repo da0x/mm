@@ -70,7 +70,7 @@ string binary() {
 }
 
 string path(const string& name) {
-    return ".obj/" + fs::path(name).stem().string() + ".o";
+    return ".obj/" + fs::path(name).filename().string() + ".o";
 }
 
 string tab(int count) {
@@ -143,12 +143,12 @@ int main(int argc, char* argv[]) {
     output << tab(1) << "mkdir .obj" << endl;
     output << endl;
     for (const fs::path& c : cpp) {
-        output << path(c.string()) << ": " << c.string();
-        for (const string& d : dependencies[c.string()]) {
+        output << path(c.filename().string()) << ": " << c.filename().string();
+        for (const string& d : dependencies[c.filename().string()]) {
             output << " " << d;
         }
         output << endl;
-        output << tab(1) << compiler() << " -o " << path(c.string()) << " -c " << c.string() << endl;
+        output << tab(1) << compiler() << " -o " << path(c.filename().string()) << " -c " << c.filename().string() << endl;
         output << endl;
     }
 
@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
     output << "clean:" << endl;
     output << tab(1) << "rm -rfv .obj" << endl;
     output << endl;
-    output << "install:" << endl;
+    output << "install: " << binary() << endl;
     output << tab(1) << "sudo cp -v " << binary() << " /usr/local/bin/" << endl;
     output << endl;
     output << "uninstall:" << endl;
