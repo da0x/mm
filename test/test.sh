@@ -5,8 +5,8 @@ mmpp makefile
 bat makefile
 make
 make clean
-./mmpp
+mmpp
 touch a.hpp
 make
 ./unmake_tests.sh 
-rm mmpp
+rm test
