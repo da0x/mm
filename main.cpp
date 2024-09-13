@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <set>
 #include <regex>
+#include <optional>
 
 using namespace std;
 namespace fs = filesystem;
@@ -49,7 +50,7 @@ string generate_tab(int count) {
 }
 
 int main(int argc, char* argv[]) {
-    optional<string> output_file_name;
+    std::optional<string> output_file_name;
     if (argc == 2) {
         output_file_name = string(argv[1]);
     }
